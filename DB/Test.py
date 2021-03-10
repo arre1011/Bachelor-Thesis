@@ -1,29 +1,8 @@
-import pymongo
-import json
+import datetime
+import pandas as pd
+from pandas_datareader import data
 
 
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-mydb = myclient["Test_DB"]
-mycol = mydb["Test"]
+s = '2018-09-30'
 
-
-mydict = { "name": "John", "address": "Highway 37" }
-
-#print("Instert: " + str(mydict))
-
-for x in mycol.find({},{  "name": 1 }):
-  print(x)
-
-#x = mycol.insert_one(mydict)
-
-#
-#
-#
-#
-# print(type(data))
-# print(data)
-#
-#
-# print(type(json.loads(data)))
-#
-# x = mycol.insert_one(bson.json_util.loads(data))
+print(s.replace('30', '01'))
