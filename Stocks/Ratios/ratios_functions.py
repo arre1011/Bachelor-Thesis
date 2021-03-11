@@ -16,63 +16,53 @@ def get_date_year_before(date):
     y = int(x)-1
     return date.replace(str(x), str(y))
 
-def get_return_on_investment(ticker, currentDate):
 
+def get_return_on_investment(ticker, currentDate):
     oneDateYearEarlier = get_date_year_before(currentDate)
-    #print(oneDateYearEarlier)
 
     currentYear = Functions.get_stock_price(ticker, currentDate)
     oneYearEarlyer = Functions.get_stock_price(ticker, oneDateYearEarlier)
 
     return str((float(currentYear) - float(oneYearEarlyer)) / float(oneYearEarlyer) * 100)
 
+
 def book_value_per_share(ticker, date, object):
-    totalAssets = 323888000000
+    totalAssets = RatiosFunctions.get_total_asset(ticker, date)
     totalLiab = RatiosFunctions.get_total_liabilities(ticker, date)
-    shares = RatiosFunctions.get_outstanding_shares(ticker,object)
+    shares = RatiosFunctions.get_outstanding_shares(ticker, object)
+
+    return (float(totalAssets) - float(totalLiab)) / float(shares)
 
 
-    return (totalAssets - totalLiab) / shares
-
-def price_per_book_Ratio_per_share(ticker, date, object):
+def price_per_book_ratio_per_share(ticker, date, object):
     shares = Functions.get_stock_price(ticker, date)
     bookVlaue = book_value_per_share(ticker, date, object)
 
-    return shares/bookVlaue
+    return float(shares)/float(bookVlaue)
 
 
-def price_per_earnings(symbol, quarterly, object):
+def price_per_earnings(ticker, date, objectNumber):
 
-    net_income = RatiosFunctions.get_net_income(symbol, quarterly)
-
-   # print("Net Income: " + net_income + " Symbole: " + symbol + " Quarterly: " + quarterly)
-
-    dividends_paid = RatiosFunctions.get_dividende_is_paid(symbol, quarterly)
-
-    #print("Dividende Paid: " + dividends_paid + " Symbole: " + symbol + " Quarterly: " + quarterly)
-
-    outstanding_shares = RatiosFunctions.get_outstanding_shares(symbol, object)
-
-    #print("Outstanding Shares: " + str(outstanding_shares) + " Symbole: " + symbol + " Quarterly: " + quarterly)
-
-    x = (float(net_income) + float(dividends_paid))
-
+    net_income = RatiosFunctions.get_net_income(ticker, date)
+    dividends_paid = RatiosFunctions.get_dividende_is_paid(ticker, date)
+    outstanding_shares = RatiosFunctions.get_outstanding_shares(ticker, objectNumber)
+    #x = (float(net_income) + float(dividends_paid))
     #print("x: " + str(x))
-
     y = float(outstanding_shares)
-
     #print("y: " + str(y))
+    earnings_per_share = float(net_income) / y
+    share_price = Functions.get_stock_price(ticker, date)
 
-    earnings_per_share = x / y
-
-   # print("Earning per Share: " + str(earnings_per_share) + " Symbole: " + symbol + " Quarterly: " + quarterly)
-
-    share_price = Functions.get_stock_price(symbol, quarterly)
-
-   # print("Share Price: " + share_price)
+    # print("Ticker:              " + ticker)
+    # print("Date:                " + date)
+    # print("Net Income:          " + net_income)
+    # print("Dividende Paid:      " + dividends_paid)
+    # print("Outstanding Shares:  " + str(outstanding_shares))
+    # print("Earning per Share:   " + str(earnings_per_share))
+    # print("Share Price:         " + share_price)
 
     return str(float(share_price) / float(earnings_per_share))
 
 
-
+#print("Price Per Earnings   " + price_per_earnings('MSFT', "2018-06-30", '0'))
 

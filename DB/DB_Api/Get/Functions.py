@@ -59,7 +59,7 @@ def get_outstanding_shares(symbole, object):
 
     for x in Query:
         x = x.get('outstandingShares')
-        x = x.get('quarterly')
+        x = x.get('annual')
         x = x.get(object)
 
     return x.get("shares")
@@ -81,4 +81,19 @@ def get_capital_expenditures(symbole, date):
             print("################## get_capital_expenditures Error Ticker: " + symbole + "Datum: " + date)
 
     return x.get("capitalExpenditures")
+
+def get_total_asset(symbole, date):
+    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    mydb = myclient["Aktien_DB"]
+    mycol = mydb["Aktien"]
+
+    Query = mycol.find({"General.Code": symbole})
+
+    for x in Query:
+        x = x.get('Financials')
+        x = x.get('Balance_Sheet')
+        x = x.get('yearly')
+        x = x.get(date)
+
+    return x.get("totalAssets")
 

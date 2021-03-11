@@ -4,9 +4,11 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 
-tickerList = ['AMZN', 'GOOGL', 'AAPL', 'MSFT', 'V', 'JNJ', 'MA', 'PG', 'DIS']
+tickerList = ['AMZN', 'GOOGL', 'AAPL', 'MSFT', 'V', 'JNJ', 'MA', 'PG', 'DIS', 'HD', 'PYPL', 'VZ', 'ADBE', 'CMCSA',
+              'KO', 'NKE', 'MRK', 'PEP', 'T', 'CRM', 'INTC', 'ORCL', 'ABT', 'CSCO', 'ABBV', 'AVGO', 'ACN',
+              'QCOM', 'LLY', 'DHR', 'UN']
 
-quartilList = ['1', '5', '9', '13', '17', '21', '25', '29', '33', '37', '41']
+quartilList = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
 
 data = []
 for ticker in tickerList:
@@ -14,12 +16,17 @@ for ticker in tickerList:
     i = 0
     while i < len(dateList):
         Stock1 = Stock(ticker, dateList[i], quartilList[i])
-        print("capitalExpenditures: " + Stock1.capitalExpenditures + "vom " + dateList[i] + "Company: " + ticker)
-        #print("Price per Ratio of the Companny:" + Stock1.symbole + " in quartyl " + Stock1.quarterly + " was: " + Stock1.pricePerEarnings)
-        #print("Company: " + stock + "Date: " + dateList[i] + " Stcok Price: " + str(Stock1.stockPrice))
-        #print("Company: " + stock + "Date: " + dateList[i] + "Return on Investment: " + Stock1.returnOnInvestment)
-        print("Company: " + ticker + "Date: " + dateList[i] + "Return on Investment: " + Stock1.returnOnInvestment)
-        #print("Company: " + stock + "Date: " + dateList[i] + "Return on Investment: " + Stock1.)
+
+        print("Company:                             " + ticker)
+        print("Date:                                " + dateList[i])
+        print("capitalExpenditures:                 " + Stock1.capitalExpenditures)
+        print("Stcok Price:                         " + str(Stock1.stockPrice))
+        print("Return on Investment:                " + Stock1.returnOnInvestment)
+        #print("TotalLiabilities:       " + Stock1.totalLiabilities)
+        print("Price per earnings:                     " + Stock1.pricePerEarnings)
+        print("Book Value per Share:                " + str(Stock1.bookValuePerShare))
+        print("Price per Book Ratio per Share:      " + str(Stock1.pricePerBookRatioPerShare))
+        print()
         i += 1
 
 

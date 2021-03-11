@@ -6,13 +6,14 @@ from DB.DB_Api.Get import StockPrice as Functions
 
 class Stock:
 
-    def __init__(self, symbole, quarterly, object_number ):
-        self.symbole = symbole
-        self.quarterly = quarterly
+    def __init__(self, ticker, date, object_number):
+        self.symbole = ticker
+        self.quarterly = date
         self.objectNumber = object_number
-        self.totalLiabilities = DBFunctions.get_total_liabilities(symbole, quarterly)
-        #self.pricePerEarnings = RatiosFunctions.price_per_earnings(symbole, quarterly, object_number)
-        self.capitalExpenditures = DBFunctions.get_capital_expenditures(symbole, quarterly)
-        self.stockPrice = Functions.get_stock_price(symbole, quarterly)
-        self.returnOnInvestment = RatiosFunctions.get_return_on_investment(symbole, quarterly)
-        #self.bookValuePerShare = RatiosFunctions.book_value_per_share(symbole, quarterly, object_number)
+        self.totalLiabilities = DBFunctions.get_total_liabilities(ticker, date)
+        self.pricePerEarnings = RatiosFunctions.price_per_earnings(ticker, date, object_number)
+        self.capitalExpenditures = DBFunctions.get_capital_expenditures(ticker, date)
+        self.stockPrice = Functions.get_stock_price(ticker, date)
+        self.returnOnInvestment = RatiosFunctions.get_return_on_investment(ticker, date)
+        self.bookValuePerShare = RatiosFunctions.book_value_per_share(ticker, date, object_number)
+        self.pricePerBookRatioPerShare = RatiosFunctions.price_per_book_ratio_per_share(ticker, date, object_number)

@@ -44,3 +44,5 @@ def get_list_of_dates(ticker):
             '2013-12-31', '2012-12-31', '2011-12-31']
         return datelist
 
+
+
