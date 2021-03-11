@@ -12,6 +12,10 @@ def get_date_year_before(date):
         return "2019-12-31"
     elif date == "2012-12-31":
         return "2011-12-31"
+    elif date == '2020-11-30':
+        return '2020-11-30'
+    elif date == '2020-05-31':
+        return '2020-05-31'
     x = date[2] + date[3]
     y = int(x)-1
     return date.replace(str(x), str(y))
@@ -31,7 +35,13 @@ def book_value_per_share(ticker, date, object):
     totalLiab = RatiosFunctions.get_total_liabilities(ticker, date)
     shares = RatiosFunctions.get_outstanding_shares(ticker, object)
 
-    return (float(totalAssets) - float(totalLiab)) / float(shares)
+    try:
+        bookValuePerShare = (float(totalAssets) - float(totalLiab)) / float(shares)
+    except:
+        print("################## Function book_value_per_share: " + ticker + " Datum: " + date +
+              " Total Assets: " + str(totalAssets) + " Total Liabilities: " + str(totalLiab))
+
+    return bookValuePerShare
 
 
 def price_per_book_ratio_per_share(ticker, date, object):
