@@ -1,48 +1,11 @@
-# import datetime
-# import pandas as pd
-# from pandas_datareader import data
-#
-#
-# shares = 17528000000
-#
-# netIncome = "57411000000.00"
-#
-# dividendsPaid = "-14119000000.00"
-#
-# sharePrice = 115
-#
-# ebit = "69964000000"
-#
-# maketCap = shares * sharePrice
-#
-# print(maketCap)
-#
-# earnings = float(netIncome) + float(dividendsPaid)
-#
-# print(earnings)
-#
-# pricePerErnings = maketCap/earnings
-#
-#
-# print(pricePerErnings)
-#
-# earningsPerShare = earnings/shares
-#
-# print(earningsPerShare)
+import pandas as pd
+from pandas_datareader import data
 
-totalAssets = 323888000000
+tickers = 'AMZN'
+end_date = '2011-12-31'
+start_date = end_date.replace('30', '01')
+start_date = end_date.replace('31', '01')
+print("##########################"+start_date)
+historicalPrices = data.DataReader(tickers, start=start_date, end=end_date, data_source='yahoo')
 
-totalLiab = 258549000000
-
-shares = 17528000000
-
-sharePrice = 115
-
-BookValue = (totalAssets - totalLiab) / shares
-
-print(BookValue)
-
-BookRatioPerShahre = sharePrice / BookValue
-
-print(BookRatioPerShahre)
-
+print

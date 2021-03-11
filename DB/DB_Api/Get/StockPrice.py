@@ -16,14 +16,13 @@ def calculate_avarage_price_per(df):
 def get_stock_price(symbole, date):
     tickers = symbole
     end_date = date
-    start_date = date.replace('30', '01')
+    start_date = ""
+    if '31' in end_date:
+        start_date = date.replace('31', '01')
+    else:
+        start_date = date.replace('30', '01')
     historicalPrices = data.DataReader(tickers, start=start_date, end=end_date, data_source='yahoo')
 
     avarage = calculate_avarage_price_per(historicalPrices)
 
     return str(avarage)
-    #
-    # print("avarage:" + str(avarage))
-    # print(historicalPrices.iat[0, 3])
-    # print(historicalPrices.iat[1, 3])
-    # return result

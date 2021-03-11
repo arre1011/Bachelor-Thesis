@@ -11,7 +11,7 @@ class Stock:
         self.quarterly = quarterly
         self.objectNumber = object_number
         self.totalLiabilities = DBFunctions.get_total_liabilities(symbole, quarterly)
-        self.pricePerEarnings = RatiosFunctions.price_per_earnings(symbole, quarterly, object_number)
+        #self.pricePerEarnings = RatiosFunctions.price_per_earnings(symbole, quarterly, object_number)
         self.capitalExpenditures = DBFunctions.get_capital_expenditures(symbole, quarterly)
         self.stockPrice = Functions.get_stock_price(symbole, quarterly)
         self.returnOnInvestment = RatiosFunctions.get_return_on_investment(symbole, quarterly)

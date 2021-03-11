@@ -2,8 +2,16 @@ from DB.DB_Api.Get import Functions as RatiosFunctions
 from DB.DB_Api.Get import StockPrice as Functions
 
 def get_date_year_before(date):
-    if( date == "2020-09-30" ):
+    if date == "2020-03-31":
+        return "2019-03-31"
+    elif date == "2020-06-30":
+        return "2019-06-30"
+    elif date == "2020-09-30":
         return "2019-09-30"
+    elif date == "2020-12-31":
+        return "2019-12-31"
+    elif date == "2012-12-31":
+        return "2011-12-31"
     x = date[2] + date[3]
     y = int(x)-1
     return date.replace(str(x), str(y))
@@ -22,6 +30,7 @@ def book_value_per_share(ticker, date, object):
     totalAssets = 323888000000
     totalLiab = RatiosFunctions.get_total_liabilities(ticker, date)
     shares = RatiosFunctions.get_outstanding_shares(ticker,object)
+
 
     return (totalAssets - totalLiab) / shares
 
