@@ -1,5 +1,5 @@
 from DB.DB_Api.Get import Functions as DBFunctions
-from Ratios import ratios_functions as RatiosFunctions
+from Stocks.Ratios import ratios_functions as RatiosFunctions
 from DB.DB_Api.Get import StockPrice as Functions
 
 

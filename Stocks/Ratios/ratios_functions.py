@@ -1,6 +1,7 @@
 from DB.DB_Api.Get import Functions as RatiosFunctions
 from DB.DB_Api.Get import StockPrice as Functions
 
+
 def get_date_year_before(date):
     if date == "2020-03-31":
         return "2019-03-31"
@@ -16,6 +17,16 @@ def get_date_year_before(date):
         return '2020-11-30'
     elif date == '2020-05-31':
         return '2020-05-31'
+    elif date == '2020-01-31':
+        return '2020-01-31'
+    elif date == '2020-07-31':
+        return '2020-07-31'
+    elif date == '2020-10-31':
+        return '2020-10-31'
+    elif date == '2020-08-31':
+        return '2020-08-31'
+    elif date == '2020-02-29':
+        return '2020-02-29'
     x = date[2] + date[3]
     y = int(x)-1
     return date.replace(str(x), str(y))
@@ -71,7 +82,13 @@ def price_per_earnings(ticker, date, objectNumber):
     # print("Earning per Share:   " + str(earnings_per_share))
     # print("Share Price:         " + share_price)
 
-    return str(float(share_price) / float(earnings_per_share))
+    pricePerearnings = str(float(share_price) / float(earnings_per_share))
+
+    if float(pricePerearnings) > 0:
+        return pricePerearnings
+    else:
+        return 0
+
 
 
 #print("Price Per Earnings   " + price_per_earnings('MSFT', "2018-06-30", '0'))
