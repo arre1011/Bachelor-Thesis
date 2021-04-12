@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 # past already 'AMZN', 'GOOGL', 'AAPL', 'MSFT', 'V', 'MA', 'PG', 'DIS', 'CMCSA', 'KO', 'ADBE', 'NKE', 'PEP', 'T', 'CRM',
 # 'INTC', 'ORCL','CSCO', 'TMO', 'AVGO', 'ACN', 'QCOM', 'DHR',
 
-tickerList = [ 'AMZN', 'GOOGL', 'AAPL', 'MSFT', 'V', 'MA', 'PG', 'DIS', 'CMCSA', 'KO', 'ADBE', 'NKE', 'PEP', 'T', 'CRM',
+tickerList = ['AAPL','AMZN', 'GOOGL', 'AAPL', 'MSFT', 'V', 'MA', 'PG', 'DIS', 'CMCSA', 'KO', 'ADBE', 'NKE', 'PEP', 'T', 'CRM',
  'INTC', 'ORCL', 'CSCO', 'TMO', 'AVGO', 'ACN', 'QCOM', 'DHR', 'VZ', 'NVDA']
 
 quartilList = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
@@ -30,7 +30,8 @@ for ticker in tickerList:
         print("Price per earnings:                  " + str(Stock1.pricePerEarnings))
         print("     Book Value per Share:                " + str(Stock1.bookValuePerShare))
         print("Price per Book Ratio per Share:       " + str(Stock1.pricePerBookRatioPerShare))
-        print()
+        print("Test Balance_Sheet ass" + str(Stock1.esgRating))
+
         i += 1
 
 

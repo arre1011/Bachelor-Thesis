@@ -28,17 +28,17 @@ def get_date_year_before(date):
     elif date == '2020-02-29':
         return '2020-02-29'
     x = date[2] + date[3]
-    y = int(x)-1
+    y = int(x) + 1
     return date.replace(str(x), str(y))
 
 
-def get_return_on_investment(ticker, currentDate):
-    oneDateYearEarlier = get_date_year_before(currentDate)
+def get_return_on_investment(ticker, dateOneYearEarlyer):
+    currentDate = get_date_year_before(dateOneYearEarlyer)
 
-    currentYear = Functions.get_stock_price(ticker, currentDate)
-    oneYearEarlyer = Functions.get_stock_price(ticker, oneDateYearEarlier)
+    currentYear = Functions.get_stock_price(ticker, dateOneYearEarlyer)
+    oneYearEarlyer = Functions.get_stock_price(ticker, currentDate)
 
-    return str((float(currentYear) - float(oneYearEarlyer)) / float(oneYearEarlyer) * 100)
+    return str(int((float(oneYearEarlyer) - float(currentYear)) / float(currentYear) * 100))
 
 
 def book_value_per_share(ticker, date, object):
@@ -54,12 +54,27 @@ def book_value_per_share(ticker, date, object):
 
     return bookValuePerShare
 
+def book_value_per_share_in_percent(ticker, date, object):
+    dateOneYearEarlier = RatiosFunctions.calculate_one_year_before(date)
+
+    currentValue = book_value_per_share(ticker, date, object)
+    beforevalue = book_value_per_share(ticker, dateOneYearEarlier, object)
+
+    return str(int((float(currentValue) - float(beforevalue)) / float(beforevalue) * 100))
 
 def price_per_book_ratio_per_share(ticker, date, object):
     shares = Functions.get_stock_price(ticker, date)
     bookVlaue = book_value_per_share(ticker, date, object)
 
     return float(shares)/float(bookVlaue)
+
+def price_per_book_ratio_per_share_percent(ticker, date, object):
+    dateOneYearEarlier = RatiosFunctions.calculate_one_year_before(date)
+
+    currentValue = price_per_book_ratio_per_share(ticker, date, object)
+    beforevalue = price_per_book_ratio_per_share(ticker, dateOneYearEarlier, object)
+
+    return str(int((float(currentValue) - float(beforevalue)) / float(beforevalue) * 100))
 
 
 def price_per_earnings(ticker, date, objectNumber):
@@ -74,13 +89,6 @@ def price_per_earnings(ticker, date, objectNumber):
     earnings_per_share = float(net_income) / y
     share_price = Functions.get_stock_price(ticker, date)
 
-    # print("Ticker:              " + ticker)
-    # print("Date:                " + date)
-    # print("Net Income:          " + net_income)
-    # print("Dividende Paid:      " + dividends_paid)
-    # print("Outstanding Shares:  " + str(outstanding_shares))
-    # print("Earning per Share:   " + str(earnings_per_share))
-    # print("Share Price:         " + share_price)
 
     pricePerearnings = str(float(share_price) / float(earnings_per_share))
 
@@ -89,7 +97,17 @@ def price_per_earnings(ticker, date, objectNumber):
     else:
         return 0
 
+def price_per_earnings_percent(ticker, date, object):
+    dateOneYearEarlier = RatiosFunctions.calculate_one_year_before(date)
 
+    currentValue = price_per_earnings(ticker, date, object)
+    beforevalue = price_per_earnings(ticker, dateOneYearEarlier, object)
+    if beforevalue == 0 or beforevalue is None or beforevalue == '0'or beforevalue == '0.00' or str(beforevalue) == "None":
+        return "null"
+    elif currentValue == 0 or currentValue is None or currentValue == '0' or currentValue == '0.00' or str(currentValue) == "None":
+        return "null"
 
-#print("Price Per Earnings   " + price_per_earnings('MSFT', "2018-06-30", '0'))
+    return str(int((float(currentValue) - float(beforevalue)) / float(beforevalue) * 100))
+
+#print("Price Per Earnings   " + book_value_per_share_in_percent('MSFT', "2020-06-30", '0'))
 
